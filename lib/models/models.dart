@@ -1,0 +1,1 @@
+export 'package:seccion12_fluttercourse/models/product.dart';
