@@ -8,10 +8,10 @@ import 'package:seccion12_fluttercourse/theme/app_theme.dart';
 import 'package:seccion12_fluttercourse/ui/input_decorations.dart';
 import 'package:seccion12_fluttercourse/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String routerName = 'Login';
+class RegisterScreen extends StatelessWidget {
+  static const String routerName = 'Register';
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +26,31 @@ class LoginScreen extends StatelessWidget {
                 CardContainer(
                   child: Column(children: [
                     const SizedBox(height: 10),
-                    Text('Login', style: Theme.of(context).textTheme.headline4,),
+                    Text('Crear cuenta', style: Theme.of(context).textTheme.headline4,),
                     const SizedBox(height: 30),
-                    const _LoginForm(),
+                    _RegisterForm(),
                   ]),
                 ),
                 const SizedBox(height: 30),
                 TextButton(
-                  onPressed: () => Navigator.pushReplacementNamed(context, RegisterScreen.routerName),
+                  onPressed: () => Navigator.pushReplacementNamed(context, LoginScreen.routerName),
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(AppTheme.primary.withOpacity(0.1)),
                     shape: MaterialStateProperty.all(const StadiumBorder()),
                   ),
-                  child: const Text('Registrarse', style: TextStyle(fontSize: 16, color: Colors.black87),),
+                  child: const Text('Ya tengo una cuenta', style: TextStyle(fontSize: 16, color: Colors.black87),),
                 ),
                 const SizedBox(height: 50),
               ],
             ),
           ),
         ),
-      ),
+      )
     );
   }
 }
 
-class _LoginForm extends StatelessWidget {
-  const _LoginForm({Key? key}) : super(key: key);
+class _RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +126,7 @@ class _LoginForm extends StatelessWidget {
                   loginFormProvider.isLoading = true;
 
                   // TODO: validar si el login es correcto
-                  final String? errorMessage = await authService.login(loginFormProvider.email, loginFormProvider.password);
+                  final String? errorMessage = await authService.createUser(loginFormProvider.email, loginFormProvider.password);
 
                   loginFormProvider.isLoading = false;
 
@@ -145,7 +144,7 @@ class _LoginForm extends StatelessWidget {
                 child: Text(
                   loginFormProvider.isLoading 
                     ? 'Espere'
-                    : 'Ingresar',
+                    : 'Registrarse',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

@@ -13,6 +13,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => ThemeProvider(isDarkmode: Preferences.isDarkmode),),
       ChangeNotifierProvider(create: (_) => ProductsService(),),
+      ChangeNotifierProvider(create: (_) => AuthService(),),
     ],
     child: const MyApp(),
   ));
@@ -24,13 +25,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: LoginScreen.routerName,
+      initialRoute: CheckAuthScreen.routerName,
       routes: {
         LoginScreen.routerName: (_) => const LoginScreen(),
+        RegisterScreen.routerName: (_) => const RegisterScreen(),
         HomeScreen.routerName: (_) => const HomeScreen(),
         ProductFormScreen.routerName: (_) => ProductFormScreen(),
+        CheckAuthScreen.routerName: (_) => const CheckAuthScreen(),
       },
       theme: Provider.of<ThemeProvider>(context).currentTheme,
     );

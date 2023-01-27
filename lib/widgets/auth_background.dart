@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:seccion12_fluttercourse/providers/providers.dart';
+import 'package:seccion12_fluttercourse/theme/app_theme.dart';
 
 class AuthBackground extends StatelessWidget {
   final Widget child;
@@ -6,7 +10,9 @@ class AuthBackground extends StatelessWidget {
   const AuthBackground({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
+    final loginFormProvider = Provider.of<LoginProvider>(context);
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -15,6 +21,21 @@ class AuthBackground extends StatelessWidget {
           _PurpleBox(),
           _HeaderIcon(),
           this.child,
+          loginFormProvider.isLoading
+            ? Opacity(
+                opacity: 0.7,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(color: Colors.black),
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: AppTheme.primary,
+                    ),
+                  ),
+                ),
+              )
+            : Container(),
         ],
       ),
     );

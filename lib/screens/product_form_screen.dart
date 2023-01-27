@@ -11,7 +11,7 @@ import 'package:seccion12_fluttercourse/widgets/widgets.dart';
 
 class ProductFormScreen extends StatelessWidget {
    
-  static const String routerName = 'EditProduct';
+  static const String routerName = 'ProductForm';
   
   @override
   Widget build(BuildContext context) {
